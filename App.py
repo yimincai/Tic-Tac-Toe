@@ -23,8 +23,7 @@ def inputPlayerLetter():
         if letter == 'X':
             playerALetter = 'X'
             playerBLetter = 'O'
-
-        if letter == 'O':
+        elif letter == 'O':
             playerALetter = 'O'
             playerBLetter = 'X'
 
@@ -38,7 +37,7 @@ def currentPlayer():
     else:
         return playerBLetter
 
-def playAgain():
+def resetBoard():
     global board
     board = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     switchPlayerCounter = 1
@@ -66,27 +65,33 @@ def boardIsFull():
     board[9] != '9')
 
 while True:
+    resetBoard()
     inputPlayerLetter()
-    print(currentPlayer(), ' will go first!')
+    print(currentPlayer() + ' will go first!')
     drawBoard(board)
     gameIsPlaying = True
 
     while gameIsPlaying:
-        print('Choose the number you want to draw', currentPlayer(), ' : ')
-        drawNumber = int(input())
+        print('Choose the number you want to draw ' + currentPlayer() + ' : ')
+        try:
+            drawNumber = int(input())
+        except ValueError:
+            print('That\'s not int!')
         num = drawNumber
+
+        if not 10 > num > 0 :
+            print('Please enter the number between 1 to 9, try again later.')
+            continue
 
         if not board[num] == 'O' or board[num] == 'X':
             board[num] = currentPlayer()
             drawBoard(board)
             if isWinner(board, currentPlayer()):
-                print(currentPlayer(), ' have won the game!!')
-                playAgain()
+                print(currentPlayer() + ' have won the game!!')
                 gameIsPlaying = False
             elif boardIsFull():
                 print('No winner, tie!')
-                playAgain()
                 gameIsPlaying = False
             switchPlayer()
         else:
-            print('The number you selected is already occupied, please try again later.')
+            print('The number you selected has been occupied, please try again later.')
