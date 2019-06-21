@@ -1,5 +1,3 @@
-import random
-
 board = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 playerALetter = ''
 playerBLetter = ''
@@ -42,7 +40,6 @@ def resetBoard():
     board = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     switchPlayerCounter = 1
 
-
 def isWinner(board, letter):
     return ((board[7] == letter and board[8] == letter and board[9] == letter) or
     (board[4] == letter and board[5] == letter and board[6] == letter) or
@@ -55,14 +52,9 @@ def isWinner(board, letter):
 
 def boardIsFull():
     return (board[1] != '1' and
-    board[2] != '2' and
-    board[3] != '3' and
-    board[4] != '4' and
-    board[5] != '5' and
-    board[6] != '6' and
-    board[7] != '7' and
-    board[8] != '8' and
-    board[9] != '9')
+    board[2] != '2' and board[3] != '3' and board[4] != '4' and
+    board[5] != '5' and board[6] != '6' and board[7] != '7' and
+    board[8] != '8' and board[9] != '9')
 
 while True:
     resetBoard()
